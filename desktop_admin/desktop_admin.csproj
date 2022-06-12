@@ -142,11 +142,23 @@
     <Compile Include="Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Menus\Dashboard.cs">
+    <Compile Include="Forms\Menus\Menu1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Menus\Dashboard.Designer.cs">
-      <DependentUpon>Dashboard.cs</DependentUpon>
+    <Compile Include="Forms\Menus\Menu1.Designer.cs">
+      <DependentUpon>Menu1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Menus\Menu2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Menus\Menu2.Designer.cs">
+      <DependentUpon>Menu2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Menus\Menu3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Menus\Menu3.Designer.cs">
+      <DependentUpon>Menu3.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Popups\Modal.cs">
       <SubType>Form</SubType>
@@ -220,8 +232,14 @@
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Menus\Dashboard.resx">
-      <DependentUpon>Dashboard.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Menus\Menu1.resx">
+      <DependentUpon>Menu1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Menus\Menu2.resx">
+      <DependentUpon>Menu2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Menus\Menu3.resx">
+      <DependentUpon>Menu3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Popups\Modal.resx">
       <DependentUpon>Modal.cs</DependentUpon>
@@ -331,6 +349,7 @@
     <None Include="Resources\images\comedy_40px.png" />
     <None Include="Resources\images\appLogo.png" />
     <None Include="Resources\ico\appLogo.ico" />
+    <None Include="Resources\images\menu_simple_icon.png" />
     <Content Include="VersionDetail\version-detail.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -345,6 +364,5 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

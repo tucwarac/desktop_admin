@@ -83,16 +83,6 @@ namespace desktop_admin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap chart_40px {
-            get {
-                object obj = ResourceManager.GetObject("chart_40px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap close {
             get {
                 object obj = ResourceManager.GetObject("close", resourceCulture);
@@ -136,6 +126,16 @@ namespace desktop_admin.Properties {
         internal static System.Drawing.Bitmap maximize_2 {
             get {
                 object obj = ResourceManager.GetObject("maximize_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_simple_icon {
+            get {
+                object obj = ResourceManager.GetObject("menu_simple_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

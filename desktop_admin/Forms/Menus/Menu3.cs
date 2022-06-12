@@ -1,5 +1,4 @@
-﻿using desktop_admin.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,14 +10,14 @@ using System.Windows.Forms;
 
 namespace desktop_admin.Forms.Menus
 {
-    public partial class Dashboard : Form
+    public partial class Menu3 : Form
     {
         #region Declare variables
         Main _main;
         #endregion
 
         #region Constructor
-        public Dashboard(Main main)
+        public Menu3(Main main)
         {
             InitializeComponent();
 
@@ -30,7 +29,7 @@ namespace desktop_admin.Forms.Menus
             {
                 _main.ExceptionHandle(ex.Message, true);
             }
-        } 
+        }
         #endregion
 
         #region StartContent
@@ -38,7 +37,7 @@ namespace desktop_admin.Forms.Menus
         {
             try
             {
-                
+
             }
             catch (Exception ex)
             {

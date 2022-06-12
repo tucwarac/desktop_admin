@@ -36,13 +36,13 @@ namespace desktop_admin.UserControls
                 _main = main;
 
                 //events binding
-                SetActiveEventToPanelControlsType(this.Controls);
+                //SetActiveEventToPanelControlsType(this.Controls);
 
                 //
                 _menuInfoModelList = (List<MenuInfoModel>)_main.getMenuInfo();
 
                 //
-                setAllMenuCursor();
+                //setAllMenuCursor();
 
                 ////
                 //setAllMenuFontColor();
@@ -336,6 +336,69 @@ namespace desktop_admin.UserControls
                 tableLayoutPanel1.RowStyles[i].Height = (!_menuInfoModelList[i].visible) ? 0 : tableLayoutPanel1.RowStyles[i].Height;
             }
         }
+        #endregion
+
+        #region GenerateMenus
+        public void GenerateMenus()
+        {
+            //Clear first
+            tableLayoutPanel1.Controls.Clear();
+            tableLayoutPanel1.ColumnStyles.Clear();
+            tableLayoutPanel1.RowStyles.Clear();
+
+            //Set RowCount
+            tableLayoutPanel1.RowCount = _menuInfoModelList.Count + 1;
+
+            //loop for set each menu
+            for (int i = 0; i < _menuInfoModelList.Count; i++)
+            {
+                tableLayoutPanel1.RowStyles.Add(new RowStyle()
+                {
+                    Height = 50,
+                    SizeType = SizeType.Absolute
+                });
+
+                Label labelMenu = new Label();
+                labelMenu.Dock = DockStyle.Fill;
+                labelMenu.Location = new Point(43, 3);
+                labelMenu.Name = "labelMenu" + (i + 1).ToString();
+                labelMenu.Size = new Size(95, 33);
+                labelMenu.Text = _menuInfoModelList[i].text;
+                labelMenu.TextAlign = ContentAlignment.MiddleLeft;
+
+                PictureBox pictureBoxMenu = new PictureBox();
+                pictureBoxMenu.Cursor = Cursors.Default;
+                pictureBoxMenu.Dock = DockStyle.Left;
+                pictureBoxMenu.Image = _menuInfoModelList[i].image;
+                pictureBoxMenu.Location = new Point(3, 3);
+                pictureBoxMenu.Name = string.Format("pictureBoxMenu{0}", (i + 1).ToString());
+                pictureBoxMenu.Size = new Size(40, 33);
+                pictureBoxMenu.SizeMode = PictureBoxSizeMode.Zoom;
+
+                Panel panelMenu = new Panel();
+                panelMenu.Controls.Add(labelMenu);
+                panelMenu.Controls.Add(pictureBoxMenu);
+                panelMenu.Dock = DockStyle.Fill;
+                panelMenu.Location = new Point(3, 3);
+                panelMenu.Name = string.Format("panelMenu{0}", (i + 1).ToString());
+                panelMenu.Padding = new Padding(3);
+                panelMenu.Size = new Size(141, 39);
+
+
+                tableLayoutPanel1.Controls.Add(panelMenu, 0, i);
+            }
+            tableLayoutPanel1.RowStyles.Add(new RowStyle()
+            {
+                SizeType = SizeType.AutoSize
+            });
+
+            //events binding
+            SetActiveEventToPanelControlsType(this.Controls);
+
+            setAllMenuCursor();
+
+            setAllMenuControlBorderRounded();
+        } 
         #endregion
 
         //#region setAllMenuFontColor

@@ -95,7 +95,14 @@ namespace desktop_admin.UserControls
         public void setMenuOnOff()
         {
             _ucLeftSideBody.setMenuOnOff();
-        } 
+        }
+        #endregion
+
+        #region GenerateMenus
+        public void GenerateMenus()
+        {
+            _ucLeftSideBody.GenerateMenus();
+        }
         #endregion
     }
 }

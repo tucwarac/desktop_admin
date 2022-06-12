@@ -49,9 +49,6 @@ namespace desktop_admin.Forms
         Point MouseDownLocation;
 
         //
-        //private LoginModel _loginModel;
-
-        //
         private Size _screenSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
         private bool _isMaximizeSize = false;
 
@@ -61,10 +58,6 @@ namespace desktop_admin.Forms
         static int _counting;
         static Popups.ModalBackground _modalBackground;
         static Popups.Modal _modal;
-
-        //
-        Menus.Dashboard _dashboard;
-        //more menu
 
         //
         private UserControls.UcHeader _ucHeader;
@@ -83,6 +76,50 @@ namespace desktop_admin.Forms
         //
         string _allFontColor = "#333333";
         #endregion
+
+        //
+        Menus.Menu1 _menu1;
+        Menus.Menu2 _menu2;
+        Menus.Menu3 _menu3;
+        //set more menu..
+
+        private void createContentForMenu()
+        {
+            //
+            _menu1 = new Menus.Menu1(this) { TopLevel = false };
+            _menu1.FormBorderStyle = FormBorderStyle.None;
+            _menu1.Dock = DockStyle.Fill;
+            _menu1.Show();
+            _MenuInfoModel_List.Add(new MenuInfoModel()
+            {
+                name = _menu1.Name
+            });
+
+
+            //
+            _menu2 = new Menus.Menu2(this) { TopLevel = false };
+            _menu2.FormBorderStyle = FormBorderStyle.None;
+            _menu2.Dock = DockStyle.Fill;
+            _menu2.Show();
+            _MenuInfoModel_List.Add(new MenuInfoModel()
+            {
+                name = _menu2.Name
+            });
+
+
+            //
+            _menu3 = new Menus.Menu3(this) { TopLevel = false };
+            _menu3.FormBorderStyle = FormBorderStyle.None;
+            _menu3.Dock = DockStyle.Fill;
+            _menu3.Show();
+            _MenuInfoModel_List.Add(new MenuInfoModel()
+            {
+                name = _menu3.Name
+            });
+
+
+            //set more menu..
+        }
 
         #region Constructor
         public Main()
@@ -152,6 +189,39 @@ namespace desktop_admin.Forms
 
                 //
                 checkTheFormActionLeftRight();
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandle(ex.Message, true);
+            }
+        }
+        #endregion
+
+        #region Main_Shown
+        private void Main_Shown(object sender, EventArgs e)
+        {
+            try
+            {
+                if (SystemSettingModel.animationOpening)
+                {
+                    animationOpening();
+                }
+                else
+                {
+                    this.Opacity = 1;
+                }
+
+                //Create menu
+                createContentForMenu();
+
+                //Set created menu
+                setCreatedContentMenuProp();
+
+                //GenerateMenus
+                _ucleftSide.GenerateMenus();
+
+                //Set Menu Visible and Set the first menu active
+                setMenuVisible();
             }
             catch (Exception ex)
             {
@@ -416,33 +486,6 @@ namespace desktop_admin.Forms
         }
         #endregion
 
-        #region Main_Shown
-        private void Main_Shown(object sender, EventArgs e)
-        {
-            try
-            {
-                if (SystemSettingModel.animationOpening) 
-                {
-                    animationOpening();
-                }
-                else
-                {
-                    this.Opacity = 1;
-                }
-
-                //Create menu
-                createContentForMenu();
-
-                //Set Menu Visible and Set the first menu active
-                setMenuVisible();
-            }
-            catch (Exception ex)
-            {
-                ExceptionHandle(ex.Message, true);
-            }
-        }
-        #endregion
-
         #region Main_FormClosing
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -544,33 +587,23 @@ namespace desktop_admin.Forms
         }
         #endregion
 
-        #region createContentForMenu
-        private void createContentForMenu()
+        #region setCreatedContentMenuProp
+        private void setCreatedContentMenuProp()
         {
             //
-            _dashboard = new Menus.Dashboard(this) { TopLevel = false };
-            _dashboard.FormBorderStyle = FormBorderStyle.None;
-            _dashboard.Dock = DockStyle.Fill;
-            _dashboard.Show();
-            _MenuInfoModel_List.Add(new MenuInfoModel() { 
-                id=(_dashboard.Tag==null)?0: Convert.ToInt32(_dashboard.Tag), 
-                name=_dashboard.Name, 
-                text=_dashboard.Text, 
-                visible=false 
-            });
-
-            //more menu
-        }
+            for (int i = 0; i < SystemSettingModel.menuInfoList.Count; i++)
+            {
+                _MenuInfoModel_List[i].id = (int)SystemSettingModel.menuInfoList[i][0];
+                _MenuInfoModel_List[i].text = (string)SystemSettingModel.menuInfoList[i][1];
+                _MenuInfoModel_List[i].image = (Image)SystemSettingModel.menuInfoList[i][2];
+                _MenuInfoModel_List[i].visible = (bool)SystemSettingModel.menuInfoList[i][3];
+            }
+        } 
         #endregion
 
         #region setMenuVisible
         private void setMenuVisible()
         {
-            //
-            _MenuInfoModel_List[0].visible = SystemSettingModel.menusVisible[1];
-            //_MenuInfoModel_List[1].visible = SystemSettingModel.menusVisible[2];
-            //_MenuInfoModel_List[2].visible = SystemSettingModel.menusVisible[3];
-
             //Set the first menu active
             _ucleftSide.setMenuActive(SystemSettingModel.menuNumberActive);
 
@@ -588,11 +621,19 @@ namespace desktop_admin.Forms
             switch (menuNumber)
             {
                 case 1:
-                    panelContent.Controls.Add(_dashboard);
-                    _dashboard.StartContent();
+                    panelContent.Controls.Add(_menu1);
+                    _menu1.StartContent();
                     break;
 
-                //more menu
+                case 2:
+                    panelContent.Controls.Add(_menu2);
+                    _menu2.StartContent();
+                    break;
+
+                case 3:
+                    panelContent.Controls.Add(_menu3);
+                    _menu3.StartContent();
+                    break;
             }
 
             //------------------------------------------------------------
@@ -619,7 +660,7 @@ namespace desktop_admin.Forms
             //------------------------------------------------------------
 
             //Set MoveEvent
-            SetMoveEventToPanelControlsType(panelContent.Controls, null);
+            //SetMoveEventToPanelControlsType(panelContent.Controls, null);
 
             //Set Font
             //UtilityHelper.SetFontToAllControlsInControls(this.Controls, font, null);

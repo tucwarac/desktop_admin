@@ -28,8 +28,8 @@ namespace desktop_admin.Models
         public static int percentOfMainLayoutFooterSide { set; get; }
 
         //
-        public static Dictionary<int, bool> menusVisible = new Dictionary<int, bool>();
         public static int menuNumberActive { set; get; }
+        public static List<object[]> menuInfoList = new List<object[]>();
 
         //
         public static int httpRestApi_timeout { set; get; }
@@ -56,16 +56,17 @@ namespace desktop_admin.Models
             percentOfMainLayoutFooterSide = 20;
 
             //
-            menusVisible.Add(1, true);
-            //menusVisible.Add(2, false);
-            //menusVisible.Add(3, false);
-            menuNumberActive = 1;
-
-            //
             httpRestApi_timeout = 60000; //60 sec
             responseStatus.Add(1, "error");
             responseStatus.Add(2, "success");
-        } 
+
+            //
+            menuNumberActive = 1;
+            menuInfoList.Add(new object[] { 1, "Menu 1", Properties.Resources.menu_simple_icon, true });
+            menuInfoList.Add(new object[] { 2, "Menu 2", Properties.Resources.menu_simple_icon, true });
+            menuInfoList.Add(new object[] { 3, "Menu 3", Properties.Resources.menu_simple_icon, true });
+            //set more menu..
+        }
         #endregion
     }
 }
